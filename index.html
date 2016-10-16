@@ -25,9 +25,19 @@
                   this.setState( {editing:false})
                   this.props.onChangeT(value, this.props.id)
               },
+              componentWillMount(){
+                this.style = {
+                  right: this.randomBetween(0,window.innerWidth -150,'px'),
+                    top: this.randomBetween(0,window.innerHeight -150,'px')
+
+                }
+              },
+              randomBetween(x,y,s){
+                return (x + Math.ceil(Math.random() * (y-x))) +s
+              },
               renderForm(){
                    return(
-                       <div className="note">
+                       <div className="note" style={this.style}>
                           <textarea ref="newText"></textarea>
                             <button onClick={this.save}>Save</button>
 
@@ -36,7 +46,7 @@
               },
               renderDisplay(){
                   return(
-                       <div className="note">
+                       <div className="note" style={this.style}>
                           <p>{this.props.children}</p>
                           <span>
                             <button onClick={this.edit}>EDIT</button>
@@ -116,7 +126,7 @@
                   }
               })
 
-          ReactDOM.render(<Board count={5}></Board>,
+          ReactDOM.render(<Board count={10}></Board>,
               document.getElementById('react-container'))
 
           </script>
